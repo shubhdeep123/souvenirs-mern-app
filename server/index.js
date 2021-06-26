@@ -2,13 +2,19 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+import postRoutes from "./routes/posts.js";
 
 const app = express();
 
+// These are the middlewares
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
+// These are the api routes endpoint
+app.use("/posts", postRoutes);
+
+// here mongoDB is being connected
 const CONNECTION_URL =
   "mongodb+srv://shubhdeep:Shubhdeep@786@cluster0.a0nxi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
