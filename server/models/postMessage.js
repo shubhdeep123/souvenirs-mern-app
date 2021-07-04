@@ -18,6 +18,6 @@ const postSchema = mongoose.Schema({
 });
 
 // this is model used to perform various operation in DB 
-const postMessage = mongoose.model("postMessage", postSchema);
+const PostMessage = mongoose.model("PostMessage", postSchema);
 
-export default postMessage;
+export default PostMessage;
