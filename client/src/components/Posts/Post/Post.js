@@ -13,7 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { deletePost, likePost } from "../../../actions/posts";
+import { deletePost, likePost } from "../../../actions/postsAction";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
@@ -51,7 +51,7 @@ const Post = ({ post, setCurrentId }) => {
       </div>
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
-          {post.tags.map((tag) => `#${tag}`)}
+          {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
       <Typography className={classes.title} variant="h5" gutterBottom>
@@ -70,7 +70,7 @@ const Post = ({ post, setCurrentId }) => {
             likeHandler(post._id);
           }}
         >
-          <ThumbUpAltIcon fontSize="small" /> Like {post.likeCount}
+          <ThumbUpAltIcon fontSize="small" /> &nbsp; Like &nbsp; {post.likeCount}
         </Button>
         <Button
           size="small"
