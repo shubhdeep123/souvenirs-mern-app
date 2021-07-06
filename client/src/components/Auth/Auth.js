@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -15,17 +15,37 @@ import useStyles from "./styles";
 import Input from "./Input";
 import Icon from "./icon";
 import { AUTH } from "../../constants/authContants";
+import { signIn, signUp } from "../../actions/authAction";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [formData, setFormData] = useState(initialState);
 
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
 
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignUp) {
+      dispatch(signUp(formData, history));
+    } else {
+      dispatch(signIn(formData, history));
+    }
+  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleShowPassword = () => setShowPassword((prevState) => !prevState);
   const switchMode = () => {
     setIsSignUp((prevState) => !prevState);
@@ -89,7 +109,7 @@ const Auth = () => {
             />
             {isSignUp && (
               <Input
-                name="confirm password"
+                name="confirmPassword"
                 label="Confirm Password"
                 handleChange={handleChange}
                 type="password"
