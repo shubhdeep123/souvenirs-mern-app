@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppBar, Avatar, Toolbar, Typography, Button } from "@material-ui/core";
 import useStyles from "./styles";
+import decode from "jwt-decode";
 import souvenirs from "../../images/souvenirs.png";
 import { LOGOUT } from "../../constants/authContants";
 
@@ -22,9 +23,15 @@ const Navbar = () => {
 
   useEffect(() => {
     const token = user?.token;
+    if (token) {
+      const decodeToken = decode(token);
+      if (decodeToken.exp * 1000 < new Date().getTime()) {
+        logout();
+      }
+    }
 
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+  }, [location,user,logout]);
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">

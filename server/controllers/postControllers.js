@@ -15,7 +15,11 @@ export const getPosts = async (req, res) => {
 // function to create a post in DB
 export const createPost = async (req, res) => {
   const post = req.body;
-  const newPost = new PostMessage(post);
+  const newPost = new PostMessage({
+    ...post,
+    creator: req.userId,
+    createdAt: new Date().toISOString(),
+  });
 
   try {
     await newPost.save();
@@ -51,7 +55,7 @@ export const deletePost = async (req, res) => {
   res.json({ message: "Post deleted successfully" });
 };
 
-// function to delete a post in DB
+// function to like a post in DB
 export const likePost = async (req, res) => {
   const { id } = req.params;
 
@@ -66,7 +70,7 @@ export const likePost = async (req, res) => {
 
   if (index === -1) {
     // like the post
-    post.likes.push(req.UserId);
+    post.likes.push(req.userId);
   } else {
     // dislike a post
     post.likes = post.likes.filter((id) => id !== String(req.userId));
