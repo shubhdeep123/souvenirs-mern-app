@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppBar, Avatar, Toolbar, Typography, Button } from "@material-ui/core";
@@ -16,11 +16,11 @@ const Navbar = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const logout = () => {
+  const logout = useCallback(() => {
     dispatch({ type: LOGOUT });
     history.push("/");
     setUser(null);
-  };
+  },[dispatch,history])
 
   useEffect(() => {
     const token = user?.token;
