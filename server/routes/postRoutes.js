@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getPosts,
+  getPostsBySearch,
   createPost,
   updatePost,
   deletePost,
@@ -14,6 +15,11 @@ const router = express.Router();
 // @route GET /posts
 // @access public
 router.get("/", getPosts);
+
+// @desc  Get searched posts
+// @route GET /posts/search?searchQuery="value"
+// @access public
+router.get("/search", getPostsBySearch);
 
 // @desc  create post
 // @route POST /posts
