@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getPosts,
+  getPost,
   getPostsBySearch,
   createPost,
   updatePost,
@@ -11,6 +12,7 @@ import auth from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+
 // @desc  Get all posts
 // @route GET /posts
 // @access public
@@ -20,6 +22,11 @@ router.get("/", getPosts);
 // @route GET /posts/search?searchQuery="value"
 // @access public
 router.get("/search", getPostsBySearch);
+
+// @desc  Get single posts
+// @route GET /posts
+// @access public
+router.get("/:id", getPost);
 
 // @desc  create post
 // @route POST /posts

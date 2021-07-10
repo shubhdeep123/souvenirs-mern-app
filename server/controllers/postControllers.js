@@ -14,13 +14,11 @@ export const getPosts = async (req, res) => {
       .limit(LIMIT)
       .skip(startIndex);
 
-    res
-      .status(200)
-      .json({
-        data: posts,
-        currentPage: startIndex,
-        numberOfPages: Math.ceil(total / LIMIT),
-      });
+    res.status(200).json({
+      data: posts,
+      currentPage: startIndex,
+      numberOfPages: Math.ceil(total / LIMIT),
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -43,6 +41,20 @@ export const getPostsBySearch = async (req, res) => {
     res.json({ data: posts });
   } catch (error) {
     res.status(404).json({ message: error.message });
+  }
+};
+
+// function to get single post
+export const getPost = async (req, res) => {
+  const {id}  = req.params;
+
+  try {
+    const post = await PostMessage.findById(id);
+
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(id);
+    res.status(404).json({ message: error });
   }
 };
 

@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/postsAction";
 import FileBase from "react-file-base64";
 import useStyles from "./styles";
+import { useHistory } from "react-router-dom";
 
 const Form = ({ currentId, setCurrentId }) => {
   const post = useSelector((state) =>
-    currentId ? state.posts.find((post) => post._id === currentId) : null
+    currentId ? state.posts.posts.find((post) => post._id === currentId) : null
   );
 
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
@@ -27,9 +29,9 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (currentId) {
+    if (currentId === 0) {
       dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
+        updatePost(currentId, { ...postData, name: user?.result?.name },history)
       );
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }));
