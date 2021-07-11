@@ -8,7 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams, useHistory } from "react-router-dom";
-
+import Tilt from "react-parallax-tilt";
 import { getPost, getPostsBySearch } from "../../actions/postsAction";
 import useStyles from "./styles";
 
@@ -46,7 +46,10 @@ const PostDetails = () => {
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
   return (
-    <Paper style={{ padding: "20px", borderRadius: "15px", marginBottom:"10px" }} elevation={6}>
+    <Paper
+      style={{ padding: "20px", borderRadius: "15px", marginBottom: "10px" }}
+      elevation={6}
+    >
       <div className={classes.card}>
         <div className={classes.section}>
           <Typography variant="h3" component="h2">
@@ -73,16 +76,18 @@ const PostDetails = () => {
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
         </div>
-        <div className={classes.imageSection}>
-          <img
-            className={classes.media}
-            src={
-              post.selectedFile ||
-              "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
-            }
-            alt={post.title}
-          />
-        </div>
+        <Tilt>
+          <div className={classes.imageSection}>
+            <img
+              className={classes.media}
+              src={
+                post.selectedFile ||
+                "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+              }
+              alt={post.title}
+            />
+          </div>
+        </Tilt>
       </div>
       {!!recommendedPosts.length && (
         <div className={classes.section}>

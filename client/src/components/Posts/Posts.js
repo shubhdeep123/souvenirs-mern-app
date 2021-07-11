@@ -3,6 +3,7 @@ import Post from "./Post/Post";
 import useStyles from "./styles";
 import { Grid, CircularProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import Tilt from "react-parallax-tilt";
 
 const Posts = ({ setCurrentId }) => {
   const classes = useStyles();
@@ -21,7 +22,9 @@ const Posts = ({ setCurrentId }) => {
     >
       {posts.map((post) => (
         <Grid key={post._id} item xs={12} sm={12} sm={6} lg={3}>
-          <Post post={post} setCurrentId={setCurrentId} />
+          <Tilt>
+            <Post post={post} setCurrentId={setCurrentId} />
+          </Tilt>
         </Grid>
       ))}
     </Grid>
