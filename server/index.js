@@ -9,7 +9,7 @@ import userRoutes from "./routes/userRoutes.js";
 const app = express();
 
 // this will allow us to access env variables
-dotenv.config({ path: "../.env" });
+dotenv.config();
 
 // These are the middlewares
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -18,7 +18,14 @@ app.use(cors());
 
 // These are the api routes endpoint
 app.use("/posts", postRoutes);
-app.use("/user",userRoutes)
+app.use("/user", userRoutes)
+
+// for welcoming api
+app.get('/', (req, res) => {
+  res.send("APP IS RUNNING")
+})
+
+
 
 // here mongoDB is being connected
 const CONNECTION_URL = process.env.MONGO_URI;
