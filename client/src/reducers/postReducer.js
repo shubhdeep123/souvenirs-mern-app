@@ -8,6 +8,7 @@ import {
   START_LOADING,
   END_LOADING,
   FETCH_POST,
+  COMMENT,
 } from "../constants/postConstants";
 
 export const postsReducer = (
@@ -36,6 +37,20 @@ export const postsReducer = (
         posts: state.posts.map((post) =>
           post._id === action.payload._id ? action.payload : post
         ),
+      };
+
+    case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          // change the post that just received a comment...
+          if (post._id === action.payload._id) {
+            return action.payload;
+          }
+
+          // return all the other posts normally
+          return post;
+        }),
       };
     case CREATE:
       return { ...state, posts: [...state.posts, action.payload] };

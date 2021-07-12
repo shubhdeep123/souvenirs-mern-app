@@ -11,6 +11,7 @@ import { useParams, useHistory } from "react-router-dom";
 import Tilt from "react-parallax-tilt";
 import { getPost, getPostsBySearch } from "../../actions/postsAction";
 import useStyles from "./styles";
+import CommentBox from "./CommentBox";
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -71,9 +72,7 @@ const PostDetails = () => {
             {moment(post.createdAt).fromNow()}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
-          <Typography variant="body1">
-            <strong>Comments - coming soon!</strong>
-          </Typography>
+          <CommentBox post={post} />
           <Divider style={{ margin: "20px 0" }} />
         </div>
         <Tilt>

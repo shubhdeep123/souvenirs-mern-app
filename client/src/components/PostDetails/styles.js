@@ -41,4 +41,22 @@ export default makeStyles((theme) => ({
     borderRadius: "15px",
     height: "39vh",
   },
+
+  commentsOuterContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    [theme.breakpoints.down('sm')]: {
+      flexDirection:"column"
+    },
+  },
+
+  commentsInnerContainer: {
+    height: "200px",
+    overflowY: "auto",
+    marginRight: "30px",
+    width: "30%",
+    [theme.breakpoints.down('sm')]: {
+      width:"100%"
+    },
+  },
 }));
